@@ -1,22 +1,27 @@
 class MusicImporter
 
-  def initialize
-    Song.create_from_filename(filename)
+
+attr_accessor :path
+
+  def initialize(path)
+    @path = path
+    Song.create_from_filename
   end
 
-  def path
-
+  def files
+    Dir.glob("#{path}/*.mp3").collect {|file| file.gsub("#{path}/","")}
   end
 
   def import
-    Song.create_from_filename(filename)
+    Song.create_from_filename
 
   end
 
 #normalizes the filename to just the MP3 filename with no path
 #loads all the MP3 files in the path directory
-  def files
 
-  end
+def path
+  @path
+end
 
 end

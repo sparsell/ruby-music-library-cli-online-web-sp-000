@@ -7,16 +7,15 @@ class Genre
 
   def initialize(name)
     @name = name
-    @@all << self
     @songs = []
+    save
+  end
+
+  def genre=
   end
 
   def save
     @@all << self
-  end
-
-  def songs
-    @songs
   end
 
   def self.all
@@ -29,14 +28,13 @@ class Genre
 
   def self.create(name)
     Genre.new(name)
-    @name = name
-    @@all << self
-    self
   end
 
 #collects artists through its songs instead of maintaining its own @artists instance
 #variable (genre has many artists through songs)
     def artists
-
+      artist_array = @songs.collect {|song| song.artist}
+      artist_array.uniq
     end
+
 end

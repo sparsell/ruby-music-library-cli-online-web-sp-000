@@ -1,3 +1,4 @@
+require 'pry'
 class Song
 extend Concerns::Findable
   attr_accessor :name, :artist, :genre
@@ -66,11 +67,15 @@ song_data = filename.split(" - ")
     artist_name = song_data[0]
     genre_name = song_data[2].split(".mp3").join
 
+
+    artist_name = Artist.find_or_create_by_name(artist_name)
+    genre_name = Genre.find_or_create_by_name(genre_name)
     self.new(song, artist_name, genre_name)
   end
 
   def self.create_from_filename(filename)
     self.new_from_filename(filename)
+    #self.create_from_filename(filename)
 #Findable
   end
 

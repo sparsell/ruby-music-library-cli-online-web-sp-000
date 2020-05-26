@@ -68,7 +68,7 @@ class MusicLibraryController
       end
   end
 
-  def list_songs_by_genre #prints all songs by a particular 
+  def list_songs_by_genre #prints all songs by a particular
     #genre in a numbered list 
     #(alphabetized by song name)
     input = puts "Please enter the name of a genre:"

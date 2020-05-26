@@ -8,7 +8,8 @@ class MusicLibraryController
   end
 
   def call
-
+    input = "" #no user input but asks again
+    while input != "exit"
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -18,9 +19,8 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    input = gets.strip
 
-    if input != exit
+    input = gets.strip
 
       case input
         when "list songs"
@@ -35,24 +35,37 @@ class MusicLibraryController
         list_songs_by_genre
         when "play song"
         play_song
+
       end
     end
   end
 
   def list_songs
-
+    song_list = []
+    song_list = Song.all.sort {|a, b| a.name <=> b.name} #alphabetize
+    song_list.each_with_index {|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"} #print as a numbered list
   end
 
   def list_artists
-
+    artist_list = []
+    artist_list = Artist.all.sort {|a, b| a.name <=> b.name}
+    artist_list.each_with_index {|artist, index| puts "#{index+1}. #{artist.name}"}
+    #artist_list.each_with_index {|artist, index|
   end
 
   def list_genres
-
+    genre_list = []
+    genre_list = Genre.all.sort {|a, b| a.name <=> b.name}
+    genre_list.each_with_index {|genre, index| puts "#{index+1}. #{genre.name}"}
   end
 
   def list_songs_by_artist
+    input = puts "Please enter the name of an artist:"
+    input = gets.strip
+      if artist = Artist.find_by_name(input)
+        artist.songs.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index+1}. #{song.name} - #{song.genre.name}"}
 
+      end
   end
 
   def list_songs_by_genre

@@ -83,7 +83,7 @@ class MusicLibraryController
     input = gets.strip
     #if song_number = Song.  #valid input
 
-      puts "Playing #{song.name} by #{song.artist.name}." 
+      puts "Playing #{song.name} by #{song.artist.name}."
   end
 
 end
